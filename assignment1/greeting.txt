@@ -1,1 +1,1 @@
-A very friendly greeting :)
+Unfriendly greeting. :(

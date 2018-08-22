@@ -1,3 +1,3 @@
 Here’s a line
-Hello world from main dir!
+Hello world from copied dir!
 Here’s another line

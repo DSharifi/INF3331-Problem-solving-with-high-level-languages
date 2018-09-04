@@ -56,7 +56,7 @@ status() {
   if activeTask; then
     line="$(tail -1 $(pwd)'/LOGFILE.txt')"
     prefix="LABEL "
-    label=${line#$prefix}
+    label=${line#$prefix} #Strips "LABEL from the line"
     echo "The task '$label' is currently being tracked"
   else
     echo "No task is active"

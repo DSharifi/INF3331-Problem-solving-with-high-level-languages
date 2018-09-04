@@ -4,7 +4,7 @@ climb() {
   comm='../'
 
   #Print out error if arg is not a number
-  if ! [[ $1=~^[1-9]+$ ]]; then
+  if ! [[ "$1" =~ ^[0-9]+$ || $1 == '' ]]; then
     echo "Error: climb only accepts positive integers as arguments.
     -Examples:
       - climb 3
@@ -15,7 +15,7 @@ climb() {
   elif [[ $1 == 0 ]]; then
     return
 
-  #climb
+  #iterator for climb level, if $1 is not an empty string
   elif [ ${1} ]; then
     for ((i = 0; i < $1 - 1; i++));
     do

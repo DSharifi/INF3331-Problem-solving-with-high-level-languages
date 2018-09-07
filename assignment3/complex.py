@@ -17,21 +17,19 @@ class Complex:
 
 
     def __add__(self, other):
-        return self.additive_operation(other, operator.__add__)
+        return self.arithmetic_operation(other, operator.add)
 
     def __sub__(self, other):
-        return self.additive_operation(other, operator.__sub__)
+        return self.arithmetic_operation(other, operator.sub)
 
     def __mul__(self, other):
-        values = self.get_values(other)
-        #raise error
-        if values == None:
-            self.unsupported_operand_types(other, operator.__mul__)
-        else:
-            return Complex((self._a*values[0] - self._b*values[1]), (self._a*values[1] + self._b*values[0]))
+        return self.arithmetic_operation(other, operator.mul)
+
 
     def __eq__(self, other):
         values = self.get_values(other)
+        if values == None:
+            return False
         if self._a == values[0] and self._b == values[1]:
             return True
         else:
@@ -40,25 +38,40 @@ class Complex:
 
     # Assignment 3.4
     def __radd__(self, other):
-        return self.r_additive_operation(other, operator.__add__)
+        return self.r_arithmetic_operation(other, operator.add)
 
     def __rsub__(self, other):
-        return self.r_additive_operation(other, operator.__sub__)
+        return self.r_arithmetic_operation(other, operator.sub)
 
     def __rmul__(self, other):
-        values = self.get_values(other)
-        temp = Complex(*values)
-        return temp.__mul__(self)
+        return self.r_arithmetic_operation(other, operator.mul)
 
-    def r_additive_operation(self, other, operation):
+
+    #assisting method
+    def arithmetic_operation(self, other, operation):
+        values = self.get_values(other)
+        #raise error
+        if values == None:
+            self.unsupported_operand_types(other, operation)
+        #multiply
+        elif operation is operator.__mul__:
+            return Complex((self._a * values[0] - self._b * values[1]),
+                           (self._a * values[1] + self._b * values[0]))
+        #add or sub
+        else:
+            return (Complex(operation(self._a, values[0]), operation(self._b, values[1])))
+
+    def r_arithmetic_operation(self, other, operation):
         values = self.get_values(other)
         if values == None:
             self.unsupported_operand_types(other, operation)
         else:
-            return Complex(*values).additive_operation(self, operation)
+            return Complex(*values).arithmetic_operation(self, operation)
 
 
     # Optional, possibly useful methods
+
+    #toString
 
     #raises error when an unsupported operand is given
     def unsupported_operand_types(self, other, operation):
@@ -68,7 +81,7 @@ class Complex:
         elif operation is operator.__sub__:
             symbol = "-"
         else:
-            symbol = "*"   
+            symbol = "*"
         raise TypeError("unsupported operand type(s) for {}: Complex and '{}'".format(symbol, instance))
 
     #returns values
@@ -80,17 +93,7 @@ class Complex:
         elif isinstance(other, Complex):
             return (other._a, other._b)
         else:
-            return None
-
-
-    #assisting method for sub and add
-    def additive_operation(self, other, operation):
-        values = self.get_values(other)
-        #raise error
-        if values == None:
-            self.unsupported_operand_types(other, operation)
-        else:
-            return (Complex(operation(self._a, values[0]), operation(self._b, values[1])))
+            None
 
     # Allows you to write `-a`
     def __neg__(self):

@@ -6,7 +6,7 @@ total_lines, total_words, total_characters = 0, 0, 0
 #returns a tuple with lines, words and chars in a file
 def word_counter(path):
     global total_lines, total_words, total_characters
-    input_file = open(path, "r")
+    input_file = open(path, "rb")
     lines, words, characters = 0,0,0
     for line in input_file:
         lines += 1
@@ -37,7 +37,7 @@ def main():
 
         
     if len(argv) > 2:
-        print("\t{}\t{}\t{}".format(total_lines, total_words, total_characters))
+        print("\t{}\t{}\t{}\ttotal".format(total_lines, total_words, total_characters))
 
 
 if __name__ == "__main__":

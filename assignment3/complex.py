@@ -19,7 +19,7 @@ class Complex:
             set self.real = real, and self.imag
         
         Returns:
-            Returns a Complex object with real as real part, and imag as the complex' imag.
+            Complex(real, imag)
         """
     
         self.real = real
@@ -110,7 +110,7 @@ class Complex:
             other: First parameter. Supported types: int, float, complex and Complex
 
         Return type: 
-            boolean
+            boolean: True for equalness, False otherwise.
 
         Implementation:
             Checks whether the real and imaginary part of both self and other are equal.
@@ -313,7 +313,7 @@ class Complex:
             can be used to 
         
         Returns:
-            boolean. Returns True if the operand is supported, False if not.
+            boolean: True if the operand is supported, False if not.
         
         Implementation:
             The test is done by using isinstance on (int, float, complex and Complex).

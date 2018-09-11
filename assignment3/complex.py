@@ -4,10 +4,9 @@ import operator
 
 class Complex:
     """
-    This module is an implementation of complex numbers in python, as specified by
-    assignment3 in INF3331. 
+    This module is an implementation of complex numbers.
     """
-    #z = a + ib
+
     def __init__(self, real = 0, imag = 0):
         """
         Default constructor for Complex.
@@ -15,6 +14,9 @@ class Complex:
         Arguments:
             real: First parameter (optional). Supported types: int, float.
             imag: Second parameter (optional). Supported types: int, float.
+        
+        Implementation:
+            set self.real = real, and self.imag
         
         Returns:
             Returns a Complex object with real as real part, and imag as the complex' imag.
@@ -27,22 +29,25 @@ class Complex:
     def conjugate(self):
         """
         Returns:
-            returns a conjugated Complex of self.
+            Returns Complex conjugate of self. 
 
         Implementation:
-            creates a new Complex with a negated imaginary part.
+            Creates a new Complex with a negated imaginary part.
+            Complex(3, -4).conjugate() == Complex(3, 4)
         """
         return Complex(self.real, -self.imag)
 
     def modulus(self):
         """
         Returns:
-            The object's modulus as a float.
+            self's modulus as a float.
         
         Implementation:
-            For any complex number z, where z = a + ib
-            Modulus  of z ---> sqrt(a**2 + b**2)
+            For any Complex z, where z = Complex(a, b)
+            >>> z.modulus()
+            sqrt(a**2 + b**2)
         """
+
         return sqrt(self.imag**2 + self.real**2)
 
     def __add__(self, other):
@@ -51,14 +56,14 @@ class Complex:
             other: First parameter. Supported types: int, float, complex and Complex
 
         Returns:
-            Returns the remainder of self subtracted by other, as a Complex.
+            Returns the sum of self added by other, as a Complex.
 
         Raises:
             TypeError: if an unsupported type is given as first argument.
 
         Implementation:
-            The difference is calculated by self._arithmetic_operation(other, operator.mul), which 
-            does the heavy lifting by calculating the output.
+            The sum is calculated by self._arithmetic_operation(other, operator.mul), 
+            which does the heavy lifting by calculating the output.
         """
 
         return self._arithmetic_operation(other, operator.add)
@@ -113,7 +118,7 @@ class Complex:
             This function will always return False if an unsupported argument is given.
         """
         #if its a non supported operand
-        if not self._is_supported_opperand(other):
+        if not self._is_supported_operand(other):
             return False
         #self and other are equal
         if self.real == other.real and self.imag == other.imag:
@@ -124,7 +129,7 @@ class Complex:
     def __str__(self):
         """ 
         return value: 
-            string
+            string: self formatted as a string.
 
         Implementation:
             Returns a string interpretation of self. "'real' + 'imag'i".
@@ -153,13 +158,13 @@ class Complex:
             other: First parameter. Supported types: int, float, complex.
 
         Returns:
-            Returns the remainder of self subtracted by other, as a Complex.
+            Returns the sum of other added by self, as a Complex.
 
         Raises:
             TypeError: if an unsupported type is given as first argument.
 
         Implementation:
-            The difference is calculated by self._arithmetic_operation(other, operator.mul), which 
+            The sum is calculated by r_self._arithmetic_operation(other, operator.add), which 
             does the heavy lifting by calculating the output.
         """
         return self._r_arithmetic_operation(other, operator.add)
@@ -170,13 +175,13 @@ class Complex:
             other: First parameter. Supported types: int, float, and complex.
 
         Returns:
-            Returns the remainder of self subtracted by other, as a Complex.
+            Returns the remainder of other subtracted by self, as a Complex.
 
         Raises:
             TypeError: if an unsupported type is given as first argument.
 
         Implementation:
-            The difference is calculated by r__arithmetic_operation(), which 
+            The difference is calculated by r_arithmetic_operation(other, operator.sub), which 
             does the heavy lifting by calculating the output.
         """
         return self._r_arithmetic_operation(other, operator.sub)
@@ -187,13 +192,13 @@ class Complex:
             other: First argument. Supported types: int, float, complex.
 
         Returns:
-            Returns the remainder of self subtracted by other, as a Complex.
+            Returns the product of other multiplied by self, as a Complex.
 
         Raises:
             TypeError: if an unsupported type is given as first argument.
 
         Implementation:
-            The difference is calculated by self._arithmetic_operation(other, operator.mul), which 
+            The product is calculated by self._arithmetic_operation(other, operator.mul), which 
             does the heavy lifting by calculating the output.
         """
         return self._r_arithmetic_operation(other, operator.mul)
@@ -209,9 +214,12 @@ class Complex:
             operation:  Second argument. Supported functions: add, sub and mul. 
         
         Implementation:
-            Returns the result of performing the operation() self on other.
+            Check if other is a supported operand. (self._is_supported_operand()). If other is
+            unsupported, a TypeError will be raised.
 
-            add and sub:
+            Returns the result of performing the operation, operation self on other.
+
+            proccedure for add and sub:
             z = a + bi
             w = c + di
             
@@ -221,21 +229,20 @@ class Complex:
             y = z - w
             y == (a - c) + (b - d)i
 
-            mul:
+            proccedure for mul:
             z = a + bi
             w = c + di
             k = z * w
 
             k == (a*c - b*d) + (a*d + b*d)i
 
-            This function checks if the operator is 
         
         Raises:
             TypeError: If other is an unsupported type.
         """
 
         #raise error if other is not supported
-        if not self._is_supported_opperand(other):
+        if not self._is_supported_operand(other):
             self._unsupported_operand_types(other, operation)
        
         #multiply
@@ -248,7 +255,7 @@ class Complex:
 
     def _r_arithmetic_operation(self, other, operation):
         """
-        Assisting method for __radd__, __rsub__, __rmul__.
+        Higher order assisting proccedure for __radd__, __rsub__, __rmul__.
 
         Args:
             other: First argument. Supported types: int, float, complex and Complex.
@@ -260,7 +267,7 @@ class Complex:
         Raises:
             TypeError: if an unsupported type is given as first argument. 
         """
-        if not self._is_supported_opperand(other):
+        if not self._is_supported_operand(other):
             self._unsupported_operand_types(other, operation)
         else:
             return Complex(other.real, other.imag)._arithmetic_operation(self, operation)
@@ -272,15 +279,20 @@ class Complex:
         The function should only be used if it is asserted that the operand is not supported.  
         
         Arguments:
-            other: first argument.          ---> unsupported operand
-            operation: second argument:     ---> the operator used
+            other: first argument: Supported types: any operand
+            (the unsupported operand)
 
-        Raises:
-            TypError.
+            operation: second argument: Supported types: __add__, __sub__, __mul__.
+            (the operator used, raising the TypeError)
 
         Implementation:
-            if, elif else block is used to get the operators symbol (+, - or *).
-            type of other is retrieved with type(other).__name__, raises a typerror.
+            if, elif else block is used to get operation's operator symbol (+, - or *).
+            type of other is retrieved with type(other).__name__. 
+            raise TypeError with an explanation string.
+
+        Raises:
+            TypeError("unsupported operand type(s) for {}: Complex and '{}'".format(symbol, instance)).
+
         """
 
         instance = type(other).__name__
@@ -293,11 +305,11 @@ class Complex:
         raise TypeError("unsupported operand type(s) for {}: Complex and '{}'".format(symbol, instance))
 
     #returns values
-    def _is_supported_opperand(self, other):
+    def _is_supported_operand(self, other):
         """
-        Check whether other is a supported operand of Complex. 
+        Check whether other is a supported operand for Complex in arithmetic operations. 
         Arguments:
-            other: First parameter: Only value types of int, float, complex and Complex 
+            other: First parameter: Supported types: int, float, complex and Complex 
             can be used to 
         
         Returns:

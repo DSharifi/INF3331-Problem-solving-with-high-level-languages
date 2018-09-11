@@ -10,4 +10,4 @@ How to use wc.py:
 
 3.2 -- 'test_complex.py'
 test_complex.py contains a main method, which will start the unit testing of Complex.
-To run the test run 'python3 test_complex.py' in the terminal.
+To run the test: run 'python3 test_complex.py' in the terminal.

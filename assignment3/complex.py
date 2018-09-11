@@ -52,7 +52,7 @@ class Complex:
 
     def __add__(self, other):
         """
-        Args:
+        Arguments:
             other: First parameter. Supported types: int, float, complex and Complex
 
         Returns:
@@ -70,7 +70,7 @@ class Complex:
 
     def __sub__(self, other):
         """
-        Args:
+        Arguments:
             other: First parameter. Supported types: int, float, complex and Complex
 
         Returns:
@@ -89,7 +89,7 @@ class Complex:
     def __mul__(self, other):
         """
         mul operator for Complex.
-        Args:
+        Arguments:
             other: First parameter. Supported types: int, float, complex and Complex
 
         Returns:
@@ -106,7 +106,7 @@ class Complex:
 
     def __eq__(self, other):
         """
-        Args:
+        Arguments:
             other: First parameter. Supported types: int, float, complex and Complex
 
         Return type: 
@@ -154,7 +154,7 @@ class Complex:
     # Assignment 3.4
     def __radd__(self, other):
         """
-        Args:
+        Arguments:
             other: First parameter. Supported types: int, float, complex.
 
         Returns:
@@ -171,7 +171,7 @@ class Complex:
 
     def __rsub__(self, other):
         """
-        Args:
+        Arguments:
             other: First parameter. Supported types: int, float, and complex.
 
         Returns:
@@ -188,7 +188,7 @@ class Complex:
 
     def __rmul__(self, other):
         """
-        Args:
+        Arguments:
             other: First argument. Supported types: int, float, complex.
 
         Returns:
@@ -209,7 +209,7 @@ class Complex:
         """
         Higher order proccedure, assisting __add__, __sub__, __mul__.
 
-        Args:
+        Arguments:
             other: First argument. Supported types: int, float, complex and Complex.
             operation:  Second argument. Supported functions: add, sub and mul. 
         
@@ -257,7 +257,7 @@ class Complex:
         """
         Higher order assisting proccedure for __radd__, __rsub__, __rmul__.
 
-        Args:
+        Arguments:
             other: First argument. Supported types: int, float, complex and Complex.
             operation:  Second argument. Supported functions: add, sub, mul. 
         

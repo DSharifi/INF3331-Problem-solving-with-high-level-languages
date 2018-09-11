@@ -1,4 +1,5 @@
 #bash script that will run wc.py
-wc() { 
-    python3 "$(pwd)"/wc.py $@
+path=$(pwd)
+wc() {
+    python3 $path/wc.py $@
 }

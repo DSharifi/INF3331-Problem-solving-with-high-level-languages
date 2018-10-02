@@ -18,7 +18,7 @@ def mandelbrot_scale(x, iterations):
     ...
     Zn = Z(n-1)^2 + x
 
-    If the absolute value of Zn is greater than 2, n will be returned.
+    If the absolute value of Zn reaches nan then n will be returned.
     Else, iterations argument will be returned
 
     
@@ -35,7 +35,7 @@ def mandelbrot_scale(x, iterations):
     i = 0
     for iter in range(iterations):
         z = (z*z) + c
-        if abs(z) > 2:
+        if np.isnan(abs(z)):
             # not  in the set
             break
         i = iter
@@ -43,7 +43,7 @@ def mandelbrot_scale(x, iterations):
 
 
 @jit(nopython=True)
-def mandelbrot_matrix(x_min, x_max, y_min, y_max, x_samples, y_samples, iterations=1000):
+def mandelbrot_numba(x_min, x_max, y_min, y_max, x_points, y_points, iterations=1000):
     """
     Returns a matrix represantation of the given rectangle in the complex plane.
     Each value in the matrix being ona scale from 0 to 'iterations' representing
@@ -55,8 +55,8 @@ def mandelbrot_matrix(x_min, x_max, y_min, y_max, x_samples, y_samples, iteratio
         y_min {float} -- imag value of the bottom edge of the rectangle
         y_max {float} -- imag value of the top edge of the rectangle
 
-        x_samples {int} -- horizontal point count 
-        y_samples {int} -- vertical point count 
+        x_points {int} -- horizontal point count 
+        y_points {int} -- vertical point count 
         iterations {int} -- (optional, default is set to 1000) Threshold iteration 
                             count to check if a complex is in the mandelbrot set
     
@@ -68,38 +68,16 @@ def mandelbrot_matrix(x_min, x_max, y_min, y_max, x_samples, y_samples, iteratio
     """
 
     # retrieve the intervals
-    x_interval = np.linspace(x_min, x_max, x_samples)
-    y_interval = np.linspace(y_min, y_max, y_samples)
+    x_interval = np.linspace(x_min, x_max, x_points)
+    y_interval = np.linspace(y_min, y_max, y_points)
 
-    rectangle = np.empty((x_samples, y_samples), dtype=numba.types.int32)
+    rectangle = np.empty((x_points, y_points), dtype=numba.types.int32)
 
     # iterate every point, and set its scale value
-    for real in range(x_samples):
-        for imag in range(y_samples):
+    for real in range(x_points):
+        for imag in range(y_points):
             scale = mandelbrot_scale(
                 (x_interval[real] + y_interval[imag]*1j), iterations)
             rectangle[real, imag] = scale
     # transpose the matrix
     return rectangle.T
-
-
-
-if __name__ == "__main__":
-    x_min = -2.0
-    x_max = 2.0
-    y_min = -2.0
-    y_max = 2.0
-
-    iterations = 100
-    dpi = 200
-
-    rectangle = mandelbrot_matrix(
-        x_min, x_max, y_min, y_max, 4000, 4000, iterations)
-
-    plt.figure(dpi=dpi)
-    plt.imshow(rectangle, cmap="magma_r", interpolation="gaussian",
-               extent=[x_min, x_max, y_min, y_max])
-    plt.xlabel("Re")
-    plt.ylabel("Im")
-    plt.savefig("filename.png", dpi=dpi)
-    plt.show()

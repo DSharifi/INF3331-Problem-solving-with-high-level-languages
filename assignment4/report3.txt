@@ -1,3 +1,10 @@
+Numba instead of numpy:
+pros:
+    - much faster operations
+cons:
+    - Support for more data types in numpy
+    - Easier to read and c
+
 The runtime of mandelbrot_matrix() is timed 5 times, to get an average:
 mandelbrot_matrix(x_min, x_max, y_min, y_max, x_samples, y_samples, iterations=1000)
 
@@ -14,6 +21,7 @@ Config 1:
     
     mandelbrot_1.py     ===>    174.15 seconds
     mandelbrot_2.py     ===>    42.52 seconds
+    mandelbrot_3.py     ===>    1.66 seconds 
 
 
 
@@ -30,6 +38,7 @@ Config 2:
 
     mandelbrot_1.py     ===>    14.08 seconds
     mandelbrot_2.py     ===>    4.57 seconds
+    mandelbrot_3.py     ===>    1.90 seconds 
     
 
 Config 3:
@@ -45,4 +54,4 @@ Config 3:
 
     mandelbrot_1.py     ===>    109.73 seconds
     mandelbrot_2.py     ===>    45.49 seconds
-
+    mandelbrot_3.py     ===>    1.68 seconds 

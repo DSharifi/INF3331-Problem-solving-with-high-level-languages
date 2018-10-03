@@ -1,19 +1,23 @@
-The runtime of mandelbrot_matrix() is timed 5 times, to get an average:
-mandelbrot_matrix(x_min, x_max, y_min, y_max, x_samples, y_samples, iterations=1000)
+The runtime of mandelbrot_x() is timed 5 times, to get an average:
+
+    mandelbrot_python(x_min, x_max, y_min, y_max, Nx, Ny, iterations= 1000):
+
+    mandelbrot_numpy(x_min, x_max, y_min, y_max, Nx, Ny, iterations=1000):
+
 
 Config 1:
     x_min = -2.0
     x_max = 2.0
     y_min = -2.0
     y_max = 2.0
-    x_samples = 4000
-    y_samples = 4000
+    Nx = 4000
+    Ny = 4000
     iterations = 100
 
     Process time:
     
-    mandelbrot_1.py     ===>    174.15 seconds
-    mandelbrot_2.py     ===>    42.52 seconds
+    mandelbrot_python()     ===>    174.15 seconds
+    mandelbrot_numpy()      ===>    42.52 seconds
 
 
 
@@ -22,14 +26,14 @@ Config 2:
     x_max = 1.0
     y_min = -1.5
     y_max = 1.5
-    x_samples = 1000
-    y_samples = 1000
+    Nx = 1000
+    Ny = 1000
     iterations = 100
 
     Process time:
 
-    mandelbrot_1.py     ===>    14.08 seconds
-    mandelbrot_2.py     ===>    4.57 seconds
+    mandelbrot_python()     ===>    14.08 seconds
+    mandelbrot_numpy()     ===>    4.57 seconds
     
 
 Config 3:
@@ -37,12 +41,12 @@ Config 3:
     x_max = 0
     y_min = -1.5
     y_max = 1.5
-    x_samples = 1000
-    y_samples = 1000
+    Nx = 1000
+    Ny = 1000
     iterations = 1000
 
     Process time:
 
-    mandelbrot_1.py     ===>    109.73 seconds
-    mandelbrot_2.py     ===>    45.49 seconds
+    mandelbrot_python()     ===>    109.73 seconds
+    mandelbrot_numpy()     ===>    45.49 seconds
 

@@ -4,9 +4,11 @@ from mandelbrot_3 import mandelbrot_numba
 from matplotlib import pyplot as plt
 import seaborn
 import os
+from sys import argv
 
 
-def menu(f, x_min, x_max, y_min, y_max, x_points, y_points, colorscale, filename):
+
+def menu(f, x_min, x_max, y_min, y_max, Nx, Ny, colorscale, filename):
     """
     Main menu for command line based user interface.
 
@@ -21,29 +23,26 @@ def menu(f, x_min, x_max, y_min, y_max, x_points, y_points, colorscale, filename
         y_min {float} -- edge value
         y_max {float} -- edge value
 
-        x_points {int} -- horizontal point count 
-        y_points {int} -- vertical point count 
+        Nx {int} -- horizontal point count 
+        Ny {int} -- vertical point count 
 
         filename {str} -- filename for output png file
         colorscale {str} -- Colorscale used to color the set
     """
     dpi = 1000
-    plots = "plots"
-    if not os.path.exists(plots):
-        os.makedirs(plots)
-
-
+    maxiter = 1000
     # matrix representation of users rectangle
-    matrix = get_matrix(f, x_min, x_max, y_min, y_max, x_points, y_points)
+    matrix = get_matrix(f, x_min, x_max, y_min, y_max,
+                        Nx, Ny, maxiter)
     # draw the rectangle
     draw(x_min, x_max, y_min, y_max, matrix, colorscale, dpi)
     # save drawn plt
-    plt.savefig(plots + "\\" + filename + ".png", dpi=dpi)
+    plt.savefig(filename + ".png", dpi=dpi)
 
 
-def get_matrix(f, x_min, x_max, y_min, y_max, x_points, y_points):
+def get_matrix(f, x_min, x_max, y_min, y_max, Nx, Ny, iterations):
     """
-    Wrapper function for mandelbrot_python(), mandelbrot_numpu() and mandelbrot_numba().
+    Wrapper function for mandelbrot_python(), mandelbrot_numpy() and mandelbrot_numba().
 
     Arguments:
         func {str} -- chosen function to compute mandelbrot set from the given rectangle
@@ -53,28 +52,28 @@ def get_matrix(f, x_min, x_max, y_min, y_max, x_points, y_points):
         y_min {float} -- edge value
         y_max {float} -- edge value
 
-        x_points {int} -- horizontal point count 
-        y_points {int} -- vertical point count 
-        region -- {tuple {float}} -- (x_min, x_max, y_min, y_max)
-        resolution -- {tuple {int}} -- (x_points, y_points)
+        Nx {int} -- horizontal point count 
+        Ny {int} -- vertical point count 
+        region          -- {tuple {float}} -- (x_min, x_max, y_min, y_max)
+        resolution      -- {tuple {int}} -- (Nx, Ny)
+        iterations {int} -- max iteration
 
     Returns:
     2D numpy.array(dtype=int):
         Matrix representation of the rectangle with real and imag values represented 
         by columns and rows respectively
     """
-
+    # ru
     if f.lower() == "python":
-        return mandelbrot_python(x_min, x_max, y_min, y_max, x_points, y_points)
+        return mandelbrot_python(x_min, x_max, y_min, y_max, Nx, Ny, iterations)
     elif f.lower() == "numpy":
-        return mandelbrot_numpy(x_min, x_max, y_min, y_max, x_points, y_points)
+        return mandelbrot_numpy(x_min, x_max, y_min, y_max, Nx, Ny, iterations)
     elif f.lower() == "numba":
-        return mandelbrot_numba(x_min, x_max, y_min, y_max, x_points, y_points)
+        return mandelbrot_numba(x_min, x_max, y_min, y_max, Nx, Ny, iterations)
     else:
         #  no valid input. Try again
-        print("Please provide a proper function")
+        print("Please provide a proper function as first parameter, such as: numba, numpy or python")
         exit()
-
 
 def draw(x_min, x_max, y_min, y_max, matrix, colorscale, dpi=1000):
     """
@@ -104,25 +103,25 @@ def draw(x_min, x_max, y_min, y_max, matrix, colorscale, dpi=1000):
     plt.ylabel('Im')
 
 def evaluate_args(args):
-    """[summary]
+    """
+    Casts system arg x_min, x_max, y_min, y_max to float,
+    and Nx and Ny to int.
     
     Arguments:
-        args {[type]} -- [description]
+        args {list} -- input args, where all values are strings
     
     Returns:
-        [type] -- [description]
+        list -- casted version of list
     """
 
     for i, arg in enumerate(args):
         if 2 <= i < 6:
-            print(i, arg, "float")
             try:
                 args[i] = (float(arg))
             except ValueError:
                 print("{} is not a float!".format(arg))
                 help()
         elif 5 <= i < 8:
-            print(i, arg, "int")
             try:
                 args[i] = int(arg)
             except ValueError:
@@ -153,25 +152,26 @@ def help():
     {5}(float) \t->\t imag value of the top edge of the rectangle.\n
     {6}(int) \t->\t horizontal point count.\n
     {7}(int) \t->\t vertical point count.\n
-    {8}(str) \t->\t color scale for the plot.\n
+    {8}(str) \t->\t color scale for the plot.
+    \t\t\t\t Examples: magma, viridis, plasma.\n
     {9}(str) \t->\t output filename of the picture.\n
 
 
     """.format(os.path.basename(__file__), "function", "x_min", "x_max", "y_min", "y_max",
-                                            "x_points", "y_points", "colorscale", "filename"))
+                                            "Nx", "Ny", "colorscale", "filename"))
 
 
 if __name__ == "__main__":   
-    from sys import argv
-    print(len(argv))
-
+    # --help flag is used
     if len(argv) == 2 and argv[1] == "--help":
         help()
+    # correct number of args
     elif len(argv) == 10:
-        print(argv)
+        # cast int and float values from sys.argv
         args = evaluate_args(argv)
-        print(args)
         menu(*args)
+        
+    # wrong number of args
     else:
         print("wrong number of arguments")
         help()

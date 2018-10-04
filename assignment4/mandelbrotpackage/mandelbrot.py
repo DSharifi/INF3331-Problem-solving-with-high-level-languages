@@ -74,34 +74,3 @@ def draw(x_min, x_max, y_min, y_max, matrix, colorscale, dpi=1000):
     # name cordinates
     plt.xlabel('Re')
     plt.ylabel('Im')
-
-
-def help():
-    """
-    Prints out a  a helpful message explaining how to use mandelbrot.py
-    """
-
-    print("""Manual:
-    This commandline script calculates the mandelbrot set within
-    a given rectangle in the complex plane.
-    
-    Call:
-    python3 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}
-
-    Where:
-    {0} \t->\t Name of file containing the script.\n
-    {1} (str) \t->\t Function used to compute the mandelbrot set.
-    \t\t\t\t Use one of: python, numpy, numba.\n
-    {2}(float) \t->\t real value of the left edge of the rectangle.\n
-    {3}(float) \t->\t real value of the right edge of the rectangle.\n
-    {4}(float) \t->\t imag value of the bottom edge of the rectangle.\n
-    {5}(float) \t->\t imag value of the top edge of the rectangle.\n
-    {6}(int) \t->\t horizontal point count.\n
-    {7}(int) \t->\t vertical point count.\n
-    {8}(str) \t->\t color scale for the plot.
-    \t\t\t\t Examples: magma, viridis, plasma.\n
-    {9}(str) \t->\t output filename of the picture.\n
-
-
-    """.format(os.path.basename(__file__), "function", "x_min", "x_max", "y_min", "y_max",
-                                            "Nx", "Ny", "colorscale", "filename"))

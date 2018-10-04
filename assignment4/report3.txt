@@ -1,4 +1,4 @@
-The runtime of mandelbrot_matrix() is timed 5 times, to get an average:
+The average runtime of 5 function calls to mandelbrot_x using time.perf_counter()
 
     mandelbrot_python(x_min, x_max, y_min, y_max, Nx, Ny, iterations= 1000):
 
@@ -12,7 +12,6 @@ Numba instead of numpy:
         - much faster operations
     cons:
         - Support for more data types in numpy
-        - Easier to read and c
 
 
 Config 1:

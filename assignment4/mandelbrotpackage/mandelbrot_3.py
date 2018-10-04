@@ -34,10 +34,9 @@ def mandelbrot_scale(x, iterations):
     z = 0
     i = 0
     for iter in range(iterations):
-        z = (z*z) + c
+        z = z*z + c
         if np.isnan(z):
             # z is reaching infinity, thus not in the set
-            # not  in the set
             break
         i = iter
     return i

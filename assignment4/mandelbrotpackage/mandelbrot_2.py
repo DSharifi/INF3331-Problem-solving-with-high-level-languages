@@ -17,8 +17,10 @@ def mandelbrot_scale(x, iterations):
     ...
     Zn = Z(n-1)^2 + x
 
-    If the absolute value of Zn reaches nan then n will be returned.
-    Else, iterations argument will be returned
+    where max{n} = iteration input
+
+    If the absolute value of Zn gets greater than 2, it means the number
+    set will eventually reach infinity, the iteration count will be returned.
 
     
     Arguments:
@@ -26,18 +28,20 @@ def mandelbrot_scale(x, iterations):
         iterations {int} -- threshold for iteration count.
     
     Returns:
-        int -- Scale value for x lies in the mandelbrot set.
+        int -- Scale value for where x lies in the mandelbrot set.
     """
-
+    # start values for c and x
     c = x
     z = 0
+    i = 0
+    # iterate set
     for iter in range(iterations):
         z = z*z + c
-       
-        if np.isnan(z):
-            # z is reaching infinity, thus not in the set
+        if abs(z) > 2:
+            # z will reach infinity
             break
-    return iter
+        i = iter
+    return i
 
 
 def mandelbrot_numpy(x_min, x_max, y_min, y_max, Nx, Ny, iterations=1000):
@@ -69,7 +73,7 @@ def mandelbrot_numpy(x_min, x_max, y_min, y_max, Nx, Ny, iterations=1000):
     x_interval = np.linspace(x_min, x_max, Nx)
     y_interval = np.linspace(y_min, y_max, Ny)
 
-    #create grid, and turn it into complex plane matrix
+    # create grid, and turn it into complex plane matrix
     xv, yv = np.meshgrid(x_interval, y_interval)
     rectangle = xv + yv*1j 
 

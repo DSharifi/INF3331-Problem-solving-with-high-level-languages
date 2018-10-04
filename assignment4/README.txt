@@ -1,28 +1,3 @@
-NB!
-The function mandelbrot_scale(x, iterations) in mandelbrot_1 and mandelbrot_2, checks where a number lies 
-in the mandelbrot set, but will raise a RuntimeWarning. The function iterates till it Z becomes so big 
-(approx of reaching ifinity), that it can't be expressed as an int (nan), hence the warning.
-
-.\mandelbrot_1.py:34: RuntimeWarning: overflow encountered in cdouble_scalars
-  z = z*z + c
-.\mandelbrot_1.py:34: RuntimeWarning: invalid value encountered in cdouble_scalars
-  z = z*z + c
-.\mandelbrot_1.py:35: RuntimeWarning: overflow encountered in cdouble_scalars
-  z = z*z + c
-.\mandelbrot_1.py.py:35: RuntimeWarning: invalid value encountered in cdouble_scalars
-  z = z*z + c
-
-
-The warnings will not occur by changing:
-    if np.isnan(z):
-to 
-    if abs(z) >= 2:
-    
-The latter will yield a less accurate output image with rigid borders. Hence I've chosen to stick
-with the former.
-
-
-
 4.5
 How to use mandelbrot.py:
     Commandline

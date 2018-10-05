@@ -37,3 +37,8 @@ How to use mandelbrot.py:
 test_complex.py contains a main method, which will start the unit testing of the
 three different implementations to calculate mandelbrot.
 To run the test: run 'python3 test_mandelbrot.py'
+
+
+Installing package:
+pip install .
+

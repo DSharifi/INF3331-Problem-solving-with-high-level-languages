@@ -1,7 +1,11 @@
 import sys
 
 
-def color_print(text, code=5):
+# asdsa ds \n   ssss
+
+"asdasdasd \n"
+
+def color_print(text, code=5): # asdsad
     """
     Prints a piece of text in a fancy way. What fancy means depends on the
     keyword argument code. Some possibilities are:

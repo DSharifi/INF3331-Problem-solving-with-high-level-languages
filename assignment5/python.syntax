@@ -1,0 +1,13 @@
+"#.*(?:$|\n)": comment
+"\".*\"": string
+"class (\w*):"
+"\\n": newline
+"True": true
+"False": false
+// captures function name, and parameters
+"def\s(\w*)\((.*)\):": function
+
+"def(\s)(.*):":
+"asdsad\nasdasd"
+
+def jaja(a, b):

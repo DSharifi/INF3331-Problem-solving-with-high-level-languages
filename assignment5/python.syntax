@@ -1,13 +1,7 @@
-"#.*(?:$|\n)": comment
-"\".*\"": string
-"class (\w*):"
-"\\n": newline
-"True": true
-"False": false
-// captures function name, and parameters
-"def\s(\w*)\((.*)\):": function
-
-"def(\s)(.*):":
-"asdsad\nasdasd"
-
-def jaja(a, b):
+"[a-zA-Z_](?:\d+|\d+\.\d*|\.\d+)": number
+"[a-zA-Z_]\w*(?=\()": function
+"\b(?:try|except|finally)\b": try
+"\b(?:True|False|None)\b": special
+"@\w+": decorator
+"#[^\n]*": comment
+"(?:\"\"\".+?(?:\"\"\"|\Z)|\"[^\"\n]\"|'[^'\n]*')": string

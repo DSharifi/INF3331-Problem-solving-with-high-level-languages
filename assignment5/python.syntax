@@ -1,6 +1,7 @@
 "[a-zA-Z_](?:\d+|\d+\.\d*|\.\d+)": number
 "[a-zA-Z_]\w*(?=\()": function
 "\b(?:try|except|finally)\b": try
+"\b(?:import|from|as)\b": imports
 "\b(?:True|False|None)\b": special
 "@\w+": decorator
 "#[^\n]*": comment

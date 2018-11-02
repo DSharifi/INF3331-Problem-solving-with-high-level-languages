@@ -72,7 +72,7 @@ def get_matrix(f, x_min, x_max, y_min, y_max, Nx, Ny, iterations):
         return mandelbrot_numba(x_min, x_max, y_min, y_max, Nx, Ny, iterations)
     else:
         #  no valid input. Try again
-        print("Please provide a proper function as first parameter, such as: numba, numpy or python")
+        print("Please provide a proper \n function as first parameter, such as: numba, numpy or python")
         exit()
 
 def draw(x_min, x_max, y_min, y_max, matrix, colorscale, dpi=1000):

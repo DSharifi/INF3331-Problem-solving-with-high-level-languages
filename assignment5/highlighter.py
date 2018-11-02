@@ -10,6 +10,7 @@ def dict_syntax_color(syntax_string, theme_string):
     Arguments:
         syntax {str} -- String representation of syntaxfile
         theme {str} -- String representation of themefile
+        
     
     Returns:
         dict -- key is name, and value are pairs of regex string and color_sequence respectively

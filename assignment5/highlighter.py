@@ -2,7 +2,6 @@ import argparse
 import toolz
 import re
 
-
 def dict_syntax_color(syntax_string, theme_string):
     """
     Returns a dictionary with syntax and themes.
@@ -29,8 +28,6 @@ def dict_syntax_color(syntax_string, theme_string):
         syntax_dict[them[0]].append(them[1])
     #print (str(syntax_dict))
     return syntax_dict
-
-
 
 def find_matches(syntax_dict, source):
     """
@@ -149,7 +146,6 @@ def remove_duplicate_coloring(matches):
 
     indices = list(indices)
     indices.sort(reverse=True)
-
     list(map(lambda match: indices.__getitem__, indices))
     return_val = []
     for i, match in enumerate(matches):

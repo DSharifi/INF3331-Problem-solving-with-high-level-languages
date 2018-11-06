@@ -5,4 +5,6 @@ number: 0;33
 try: 0;35
 special: 0;41
 string: 0;93
-imports: 0;50
+imports: 0;35
+class: 38;5;211
+statements: 0;35

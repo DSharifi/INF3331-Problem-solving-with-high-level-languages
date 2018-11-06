@@ -1,4 +1,4 @@
-"[a-zA-Z_](?:\d+|\d+\.\d*|\.\d+)": number
+"(?<!\w)(\d+)(?!\w)": number
 "[a-zA-Z_]\w*(?=\()": function
 "\b(?:try|catch|finally)\b": try
 "\b(?:true|false|null)\b": special

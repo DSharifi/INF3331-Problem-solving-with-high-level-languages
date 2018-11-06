@@ -17,7 +17,7 @@ def create_dict(regex_list):
     colors = ("0;30", "0;31", "0;32", "0;33",
               "0;34", "0;35", "0;36", "0;37", "0;38")
     i = 0
-
+    
     for regex in regex_list:
         if i >= len(colors):
             i = 0

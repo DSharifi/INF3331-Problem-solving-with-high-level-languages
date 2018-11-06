@@ -187,3 +187,6 @@ class python
 test"hello" test  #hello
 
 for while in return
+
+" hello "
+' hello '

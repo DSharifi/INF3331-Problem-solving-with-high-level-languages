@@ -5,6 +5,7 @@
 "\b(?:True|False|None)\b": special
 "@\w+": decorator
 "#[^\n]*": comment
-"(?:\"\"\".+?(?:\"\"\"|\Z)|\"[\w*"\n]\"|'[^'\n]*')": string
+"(?:\"\"\".+?(?:\"\"\"|\Z)|\"\w*\"|'[^'\n]*')": string
 "((?:\b)class(?:\b))": class
 "\b(?:if|else|elif)\b": statements
+"\b(?:def)\b": def

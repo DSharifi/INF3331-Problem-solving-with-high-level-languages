@@ -182,5 +182,5 @@ import True;
 False
 @Override #hello @Override
 
-class python 
-"hello"
+class python  
+test"hello" test  #hello

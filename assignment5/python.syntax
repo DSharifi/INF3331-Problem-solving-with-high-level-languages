@@ -1,4 +1,4 @@
-"[a-zA-Z_](?:\d+|\d+\.\d*|\.\d+)": number
+"(?<!\w)(\d+)(?!\w)": number
 "[a-zA-Z_]\w*(?=\()": function
 "\b(?:try|except|finally)\b": try
 "\b(?:import|from|as)\b": imports
@@ -8,4 +8,6 @@
 "(?:\"\"\".+?(?:\"\"\"|\Z)|\"\w*\"|'[^'\n]*')": string
 "((?:\b)class(?:\b))": class
 "\b(?:if|else|elif)\b": statements
-"\b(?:def)\b": def
+"\b(?:def|in)\b": defin
+"\b(?:while|for)\b": loops
+"\b(?:return)\b": return

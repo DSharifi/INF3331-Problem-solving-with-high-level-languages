@@ -1,11 +1,13 @@
 comment: 0;32
 function: 0;34
 decorator: 0;33
-number: 0;33
+number: 38;5;139
 try: 0;35
 special: 0;41
 string: 0;93
 imports: 0;35
 class: 38;5;211
 statements: 0;35
-def: 0;35
+defin: 0;35
+loops: 0;35
+return: 0;35

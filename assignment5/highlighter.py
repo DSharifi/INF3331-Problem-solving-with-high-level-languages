@@ -151,7 +151,6 @@ def remove_duplicate_coloring(matches):
     indices.sort(reverse=True)
 
     list(map(lambda match: indices.__getitem__, indices))
-
     return_val = []
     for i, match in enumerate(matches):
         if not i in indices:

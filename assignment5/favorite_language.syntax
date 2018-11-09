@@ -3,5 +3,6 @@
 "\b(?:try|catch|finally)\b": try
 "\b(?:true|false|null)\b": special
 "@\w+": decorator
-"\\\[^\n]*": comment
+"\/\/[^\n]*": comment
 "(?:\"\"\".+?(?:\"\"\"|\Z)|"[^"\n]*"|'[^'\n]*')": string
+"(int\b|boolean\b|String\b|double\b|float\b|void\b)": types

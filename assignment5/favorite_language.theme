@@ -6,3 +6,5 @@ try: 0;35
 special: 0;41
 string: 38;5;215
 types: 38;5;399
+variable: 38;5;592
+access: 0;35

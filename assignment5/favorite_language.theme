@@ -1,7 +1,10 @@
 comment: 0;32
 function: 0;34
 decorator: 0;33
-number: 0;33
+number: 38;5;139
 try: 0;35
 special: 0;41
-string: 0;93
+string: 38;5;215
+types: 38;5;399
+variable: 38;5;592
+access: 0;35

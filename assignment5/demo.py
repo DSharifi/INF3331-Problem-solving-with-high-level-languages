@@ -175,3 +175,18 @@ if __name__ == "__main__":
     else:
         print("wrong number of arguments")
         help()
+        2 25 53 
+        return 5 #returning 5
+
+for highlighter from highlighter as lop
+import True;
+False
+@Override #hello @Override
+
+class python  
+test"hello" test  #hello
+
+for while in return
+
+" hello "
+' hello '

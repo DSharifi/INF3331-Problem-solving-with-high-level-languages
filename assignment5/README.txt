@@ -1,7 +1,7 @@
 How to run files:
 5.1 Syntax highlighting
     usage: highlighter.py syntaxfile themefile sourcefile_to_color
-    example: highlighter.py python.syntax python.theme demo.py
+    example: python highlighter.py python.syntax python.theme demo.py
     use --help flag to get information on how to use the script.
 
  5.3 Favorite language

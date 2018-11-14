@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html>
-
 <body>
-    <h1>Visualization of CO2 emissions by country</h1>
+    <h1>CO2 levels by country</h1>
+   
+    
+    <form action="/plot_co2" method="POST">
+    
 
+    <b>Year:</b>
+    <br>
+    <select id="year" name="year"> </select>
+        
+    <script>
+        var year_options = "";
+        for (i = 2016; i >= 1960; i--) {
+            year_options += "<option value=" + i + ">" + i + "</option>";
+        }
+        document.getElementById("year").innerHTML = year_options;
 
-    <form action="/plot_co2_country" method="POST">
+    </script>
 
-
-        <b>Year range:</b>
-        <br>
-        Start:
-        <br>
-        End:
-
-        <br>
-        <br>
-        <b>min y-axis:</b>
-        <br>
-        <input type="number" name="min y-axis" value="0">
-        <br>
-        <b>max y-axis:</b>
-        <br>
-        <input type="number" name="max y-axis" value="10000">
-        <br>
-        <p><input type="submit" value="submit" /></p>
+    <br>
+    <br>
+    <br>
+    <b>Range of emissions:</b>
+    <br>
+    <b>lower:</b>
+    <br>
+    <input type="number" name="lower" value="">
+    <br>
+    <b>upper:</b>
+    <br>
+    <input type="number" name="upper" value="">
+    <br>
+    <p><input type="submit" value="submit" /></p>
     </form>
-    <img src="{{test}}" alt="Rhinoceros" ,width="420" height="420">
+    <img src="{{picture}}" alt="" ,width="420" height="420">
+
 </body>
 </html>

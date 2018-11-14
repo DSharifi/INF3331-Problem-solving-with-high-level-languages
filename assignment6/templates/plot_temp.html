@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Temperature levels over Time</h1>
+
+<form action="/plot_temp" method="POST">
+
+<b>Year range:</b>
+
+<br>
+Start:
+<select id="year_from" name ="year_from" > </select>
+<br>
+End:
+<select id="year_to" name ="year_to" > </select>
+<br>
+<br>
+
+<b>Month:</b>
+<br>
+<select id="month" name = "month">
+    <option value="January">January</option>
+    <option value="February">February</option>
+    <option value="March">March</option>
+    <option value="April">April</option>
+    <option value="May">May</option>
+    <option value="June">June</option>
+    <option value="July">July</option>
+    <option value="August">August</option>
+    <option value="September">September</option>
+    <option value="October">October</option>
+    <option value="November">November</option>
+    <option value="December">December</option>
+</select>
+
+<br>
+<br>
+<b>min y-axis:</b>
+<br>
+<input type="number" name="min y-axis" value="0">
+<br>
+<b>max y-axis:</b>
+<br>
+<input type="number" name="max y-axis" value="10000">
+<br>
+<br>
+
+
+<script>
+    var year_options = "";
+    for (i = 2012; i >= 1816; i--) {
+        year_options += "<option value=" + i + ">" + i + "</option>";
+    }
+    document.getElementById("year_from").innerHTML = year_options;
+    document.getElementById("year_to").innerHTML = year_options;
+</script>
+
+<p><input type="submit" value="submit" />
+</p>
+</form>
+
+<img src="{{test}}" alt="Rhinoceros" ,width="420" height="420">
+</body>
+</html>

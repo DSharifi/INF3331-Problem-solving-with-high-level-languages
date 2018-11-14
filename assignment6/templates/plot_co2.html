@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>CO2 levels over Time</h1>
+   
+    
+    <form action="/plot_co2" method="POST">
+    
+
+    <b>Year range:</b>
+    <br>
+    Start:
+    <select id="year_from" name="year_from"> </select>
+    <br>
+    End:
+    <select id="year_to" name="year_to"> </select>
+        </select>
+        <script>
+            var year_options = "";
+            for (i = 2012; i >= 1751; i--) {
+                year_options += "<option value=" + i + ">" + i + "</option>";
+            }
+
+                document.getElementById("year_from").innerHTML = year_options;
+                document.getElementById("year_to").innerHTML = year_options;
+        </script>
+
+    <br>
+    <br>
+    <b>min y-axis:</b>
+    <br>
+    <input type="number" name="min y-axis" value="0">
+    <br>
+    <b>max y-axis:</b>
+    <br>
+    <input type="number" name="max y-axis" value="10000">
+    <br>
+    <p><input type="submit" value="submit" /></p>
+    </form>
+    <img src="{{test}}" alt="Rhinoceros" ,width="420" height="420">
+
+</body>
+</html>

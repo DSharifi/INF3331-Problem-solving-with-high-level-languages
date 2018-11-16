@@ -5,16 +5,13 @@ import os
 import matplotlib.pyplot as plt
 
 
-co2_by_country = pd.read_csv('CO2_by_country.csv', sep=',' )
-co2 = pd.read_csv('co2.csv', sep=',')
-temp = pd.read_csv('temperature.csv', sep=',')
+co2_by_country = pd.read_csv('dataset\CO2_by_country.csv', sep=',' )
+co2 = pd.read_csv('dataset\co2.csv', sep=',')
+temp = pd.read_csv('dataset\\temperature.csv', sep=',')
 
 # Can give a false positive by default, as adressed here:
 # http://pandas-docs.github.io/pandas-docs-travis/#returning-a-view-versus-a-copy
 pd.options.mode.chained_assignment = None
-
-
-
 
 def plot_temperature(month, year_start, year_end, y_min, y_max):
     """plots temperatue for a month over range of years
@@ -72,9 +69,6 @@ def plot_CO2(year_start, year_end, y_min, y_max):
     return plt
 
 
-
-
-
 def plot_CO2_by_Country(lower_threshold, upper_threshold, year):
     """Plots every country between given threshold on a bar chart
     
@@ -90,29 +84,20 @@ def plot_CO2_by_Country(lower_threshold, upper_threshold, year):
     year_str = str(year)
 
     countries = co2_by_country[["Country Code", year_str]]
-    countries.loc[year_str] = pd.to_numeric(countries[year_str])
-    countries = countries[(countries[year_str] >= lower_threshold) & (countries[year_str] <= upper_threshold)]
     
-    ax = countries.plot.bar(label='Normal', title="emissions")
+    # parse strings to numbers
+    countries.loc[year_str] = pd.to_numeric(countries[year_str])
+
+    countries = countries[(countries[year_str] >= lower_threshold) &
+    (countries[year_str] <= upper_threshold)]
+        
+    ax = countries.plot.bar(x="Country Code", label='Normal', title="Emissions in {}:".format(year_str))
     ax.set(xlabel="Country code", ylabel="Emission per capita")
 
     # adjust the plot, so the axis labels are visible
     plt.gcf().subplots_adjust(bottom=0.15)
 
-
-
     return plt
-
-
-
-if __name__ == '__main__':
-    lower = 0.
-    upper = .2
-
-    year = 2000
-
-    plot_CO2_by_Country(lower, upper, year)
-
 
 # def is_file(filename):
 #     """Checks if a path is an actual directory"""
@@ -125,7 +110,7 @@ if __name__ == '__main__':
 
 # if __name__ == '__main__':
 #     parser = argparse.ArgumentParser(
-#         description='Plots time vs. CO2 or time vs. temperature')
+#         description='Plots time vs. CO2, time vs. temperature, or CO2 levels by countries')
  
 #     parser.add_argument('time', help='''A csv file of time''')
 #     parser.add_argument('compare_val', help='''A csv file of either CO2 levels or temperature''')

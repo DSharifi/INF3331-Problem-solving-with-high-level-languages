@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body>
+    <form action="/">
+        <input type="submit" value="Home" />
+    </form>
     <h1>CO2 levels over Time</h1>
     <form action="/plot_co2" method="POST">
     <b>Year range:</b>
@@ -20,16 +23,15 @@
                 document.getElementById("year_from").innerHTML = year_options;
                 document.getElementById("year_to").innerHTML = year_options;
         </script>
-
     <br>
     <br>
     <b>min y-axis:</b>
     <br>
-    <input type="number" name="min y-axis" value="0">
+    <input name="min y-axis" value="0">
     <br>
     <b>max y-axis:</b>
     <br>
-    <input type="number" name="max y-axis" value="10000">
+    <input name="max y-axis" value="10000">
     <br>
     <p><input type="submit" value="submit" /></p>
     </form>

@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
 <body>
+    <form action="/">
+        <input type="submit" value="Home" />
+    </form>
     <h1>CO2 levels by country</h1>
-   
     
-    <form action="/plot_co2" method="POST">
-    
+    <form action="/plot_co2_country" method="POST">
 
     <b>Year:</b>
     <br>
     <select id="year" name="year"> </select>
-        
+
     <script>
         var year_options = "";
-        for (i = 2016; i >= 1960; i--) {
+        for (i = 2015; i >= 1960; i--) {
             year_options += "<option value=" + i + ">" + i + "</option>";
         }
         document.getElementById("year").innerHTML = year_options;
-
     </script>
-
+    
     <br>
     <br>
     <br>
     <b>Range of emissions:</b>
     <br>
-    <b>lower:</b>
+    <b>Upper:</b>
     <br>
-    <input type="number" name="lower" value="">
+    <input name="upper" value="">
     <br>
-    <b>upper:</b>
+    <b>Lower:</b>
     <br>
-    <input type="number" name="upper" value="">
+    <input name="lower" value="">
     <br>
     <p><input type="submit" value="submit" /></p>
     </form>

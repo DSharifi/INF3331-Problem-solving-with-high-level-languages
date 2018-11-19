@@ -17,7 +17,7 @@ def main_menu():
    Main menu.
    """
    select = request.values.get('years_co2')
-   return render_template('home.html', picture='static\co2.jpg')
+   return render_template('home.html')
 
 
 # co2 plotting
@@ -32,21 +32,25 @@ def draw_co2():
       template -- rendered template of co2.html
    """
 
-   year_from = int(request.form["year_from"])
-   year_to = int(request.form["year_to"])
+   try:
+      year_from = int(request.form["year_from"])
+      year_to = int(request.form["year_to"])
 
-   y_min = int(request.form["min y-axis"])
-   y_max = int(request.form["max y-axis"])
+      y_min = int(request.form["min y-axis"])
+      y_max = int(request.form["max y-axis"])
 
-   if y_min > y_max or year_from > year_to:
+      if y_min > y_max or year_from > year_to:
+         return view_co2()
+
+      plot = tp.plot_CO2(year_from, year_to, y_min, y_max)
+      plot.savefig("static\images\co2.png", dpi = 600)
+
+   except:
       return view_co2()
-
-   plot = tp.plot_CO2(year_from, year_to, y_min, y_max)
-   plot.savefig("static\images\co2.png", dpi = 600)
 
    return view_co2(show = True)
 
-# 
+
 @app.route('/plot_co2')
 def view_co2(show=False):
    """Shows a rendered page of of plot_co2.html.
@@ -79,23 +83,25 @@ def draw_temp():
    """
 
    # get form values
-   year_from = int(request.form["year_from"])
-   year_to = int(request.form["year_to"])
+   try:
+      year_from = int(request.form["year_from"])
+      year_to = int(request.form["year_to"])
 
-   month = request.form["month"]
+      month = request.form["month"]
 
-   y_min = int(request.form["min y-axis"])
-   y_max = int(request.form["max y-axis"])
+      y_min = int(request.form["min y-axis"])
+      y_max = int(request.form["max y-axis"])
+   
+      # if form values are invalig, reload page without plot
+      if y_min > y_max or year_from > year_to:
+         return view_temp()
 
-   # if form values are invalig, reload page without plot
-   if y_min > y_max or year_from > year_to:
+      plot = tp.plot_temperature(month, year_from, year_to, y_min, y_max)
+      plot.savefig("static\images\\temperature.png", dpi=600)
+   
+   except:
       return view_temp()
    
-   try:
-      plot = tp.plot_temperature(month, year_from, year_to, y_min, y_max)
-   except Exception:
-      return view_temp()
-   plot.savefig("static\images\\temperature.png", dpi=600)
    return view_temp(show=True)
 
 
@@ -123,21 +129,22 @@ def draw_co2_country():
    Handles post requests for /plot_temp.
    Draws plots of temperature over time, and saves the plot as a png file.
    """
-   lower = float(request.form["lower"])
-   upper = float(request.form["upper"])
-
-   year = int(request.form["year"])
-   
-
-   # invalid input, render page without plot
-   if lower > upper:
-      return view_co2_country()
    try:
+      lower = float(request.form["lower"])
+      upper = float(request.form["upper"])
+
+      year = int(request.form["year"])
+   
+      # invalid input, render page without plot
+      if lower > upper:
+         return view_co2_country()
+      
       plot = tp.plot_CO2_by_Country(lower, upper, year)
+      plot.savefig("static\images\co2_country.png", dpi=600)
+
    except:
       return view_co2_country()
 
-   plot.savefig("static\images\co2_country.png", dpi=600)
    return view_co2_country(show=True)
 
 
@@ -151,8 +158,6 @@ def view_co2_country(show=False):
       return render_template("plot_co2_country.html", picture='\static\images\co2_country.png')
    else:
       return render_template("plot_co2_country.html", picture="")
-
-
 
 
 

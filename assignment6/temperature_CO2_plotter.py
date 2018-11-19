@@ -35,7 +35,7 @@ def plot_temperature(month, year_start, year_end, y_min, y_max):
                             (temp_month['Year'] <= year_end)]
 
     plt.close()
-   
+    
     ax = temp_month.plot(y = month, x = 'Year')
     ax.set(xlabel="Year", ylabel="Temperature (C)")
 
@@ -61,6 +61,12 @@ def plot_CO2(year_start, year_end, y_min, y_max):
     co2_plot = co2[(co2['Year'] >= year_start) &
                      (co2['Year'] <= year_end)]
     plt.close()
+    
+    #change date to year
+    co2_plot['Year'] = pd.to_datetime(
+        co2_plot['Year'].astype(str), format="%Y")
+
+
     ax = co2_plot.plot(y='Carbon', x='Year', title="Increase of carbon levels")
     ax.set(xlabel="Year", ylabel="CO2 Level")
     plt.ylim(y_min, y_max)

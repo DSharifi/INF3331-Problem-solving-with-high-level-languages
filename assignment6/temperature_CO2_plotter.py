@@ -5,9 +5,9 @@ import os
 import matplotlib.pyplot as plt
 
 
-co2_by_country = pd.read_csv('dataset\CO2_by_country.csv', sep=',' )
-co2 = pd.read_csv('dataset\co2.csv', sep=',')
-temp = pd.read_csv('dataset\\temperature.csv', sep=',')
+co2_by_country = pd.read_csv('dataset/CO2_by_country.csv', sep=',' )
+co2 = pd.read_csv('dataset/co2.csv', sep=',')
+temp = pd.read_csv('dataset/temperature.csv', sep=',')
 
 # Can give a false positive by default, as adressed here:
 # http://pandas-docs.github.io/pandas-docs-travis/#returning-a-view-versus-a-copy

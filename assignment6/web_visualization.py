@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 import temperature_CO2_plotter as tp
-from wtforms import SelectField
 
 app = Flask(__name__)
 
@@ -16,7 +15,6 @@ def main_menu():
    """
    Main menu.
    """
-   select = request.values.get('years_co2')
    return render_template('home.html')
 
 
@@ -43,7 +41,7 @@ def draw_co2():
          return view_co2()
 
       plot = tp.plot_CO2(year_from, year_to, y_min, y_max)
-      plot.savefig("static\images\co2.png", dpi = 600)
+      plot.savefig("static/images/co2.png", dpi = 600)
 
    except:
       return view_co2()
@@ -63,7 +61,7 @@ def view_co2(show=False):
    """
 
    if show:
-      return render_template("plot_co2.html", picture='\static\images\co2.png')
+      return render_template("plot_co2.html", picture='/static/images/co2.png')
    else:
       return render_template("plot_co2.html", picture = "")
 
@@ -97,7 +95,7 @@ def draw_temp():
          return view_temp()
 
       plot = tp.plot_temperature(month, year_from, year_to, y_min, y_max)
-      plot.savefig("static\images\\temperature.png", dpi=600)
+      plot.savefig("static/images/temperature.png", dpi=600)
    
    except:
       return view_temp()
@@ -112,7 +110,7 @@ def view_temp(show=False):
    Shows plots of temperature over time, and saves the plot as a png file.
    """
    if show:
-      return render_template("plot_temp.html", picture='static\images\\temperature.png')
+      return render_template("plot_temp.html", picture='static/images/temperature.png')
    else:
       return render_template("plot_temp.html", picture="")
 
@@ -140,7 +138,7 @@ def draw_co2_country():
          return view_co2_country()
       
       plot = tp.plot_CO2_by_Country(lower, upper, year)
-      plot.savefig("static\images\co2_country.png", dpi=600)
+      plot.savefig("static/images/co2_country.png", dpi=600)
 
    except:
       return view_co2_country()
@@ -155,7 +153,7 @@ def view_co2_country(show=False):
    Shows plots of temperature over time, and saves the plot as a png file.
    """
    if show:
-      return render_template("plot_co2_country.html", picture='\static\images\co2_country.png')
+      return render_template("plot_co2_country.html", picture='/static/images/co2_country.png')
    else:
       return render_template("plot_co2_country.html", picture="")
 
